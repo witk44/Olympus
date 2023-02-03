@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from tile import Tile
 from player import Player
+from debug import debug
 class Level:
     def __init__(self) -> None:
         # get the display surface
@@ -19,10 +20,12 @@ class Level:
                 if col == 'x':
                     Tile((x,y),[self.visible_sprites, self.obstacle_sprites])
                 elif col == 'p':
-                    Player((x,y),[self.visible_sprites])
+                    self.player = Player((x,y),[self.visible_sprites])
                     
             
 
     def run(self):
         #update and draw game
         self.visible_sprites.draw(self.display_surface)
+        self.visible_sprites.update()
+        debug(self.player.direction)
