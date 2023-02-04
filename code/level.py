@@ -26,7 +26,7 @@ class Level:
                         y = row_index*TILESIZE
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites],'invisible')
-                        if style == 'obstacles':
+                        if style == 'obstacles':                                         
                             Tile((x,y),[self.obstacle_sprites],'invisible')
         #         if col == 'x':
         #             Tile((x,y),[self.visible_sprites, self.obstacle_sprites])
