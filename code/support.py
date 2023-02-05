@@ -22,12 +22,6 @@ def import_folder(path):
 
 def custom_sort(images):
     for index,image in enumerate(images):
-        # image_int = image.replace(".png","")
-        # if index == 0:
-        #     continue
-        # image2 = images[index-1].replace(".png","")
-        # image2_int = image2.replace(".png","")
-        # if(int(image_int) < int(image2_int)):
         if(index < 10):
             images[index] = '00' + str(index) + '.png'
         elif(index < 100):

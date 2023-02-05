@@ -38,10 +38,6 @@ class Level:
                         elif style == 'old_tree':                                         
                             surf = graphics['tileset'][int(col)]
                             Tile((x,y),[self.visible_sprites],'old_tree',surf)
-        #         if col == 'x':
-        #             Tile((x,y),[self.visible_sprites, self.obstacle_sprites])
-        #         elif col == 'p':
-        #             self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites)
         self.player = Player((400,300),[self.visible_sprites],self.obstacle_sprites)
             
 
