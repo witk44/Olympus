@@ -16,7 +16,12 @@ class Level:
     def create_map(self):
         layouts = {
             'boundary': import_csv_layout('data/levels/level0/INTRO._FloorBlocks.csv'),
-            'obstacles': import_csv_layout('data/levels/level0/INTRO._Obstacles.csv')
+            'obstacles': import_csv_layout('data\levels\level0\INTRO._Obstacles.csv'),
+            'old_tree': import_csv_layout('data\levels\level0\INTRO._Tree.csv')
+        }
+        graphics = {
+            'tileset':import_folder('graphics/tileset'),
+            # 'tutorial':import_folder('graphics/tutorial')
         }
         for style,layout in layouts.items():
             for row_index,row in enumerate(layout):
@@ -26,8 +31,13 @@ class Level:
                         y = row_index*TILESIZE
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites],'invisible')
+                        #draw obstacles on map that are visible and colidable (this is where draw error is happening)
                         if style == 'obstacles':                                         
-                            Tile((x,y),[self.obstacle_sprites],'invisible')
+                            surf = graphics['tileset'][int(col)]
+                            Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'obstacles',surf)
+                        # if style == 'old_tree':                                         
+                        #     surf = graphics['tutorial'][int(col)]
+                        #     Tile((x,y),[self.visible_sprites],'old_tree',surf)
         #         if col == 'x':
         #             Tile((x,y),[self.visible_sprites, self.obstacle_sprites])
         #         elif col == 'p':
