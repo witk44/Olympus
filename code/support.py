@@ -11,10 +11,29 @@ def import_csv_layout(path):
 def import_folder(path):
     surface_list = []
     for _,__,image_files in walk(path):
+        image_files = custom_sort(image_files)
         for image in image_files:
             full_path = path + "/" + image
             image_surface = pygame.image.load(full_path).convert_alpha()
             surface_list.append(image_surface)
+        
+    # surface_list.sort()
     return surface_list
 
+def custom_sort(images):
+    for index,image in enumerate(images):
+        # image_int = image.replace(".png","")
+        # if index == 0:
+        #     continue
+        # image2 = images[index-1].replace(".png","")
+        # image2_int = image2.replace(".png","")
+        # if(int(image_int) < int(image2_int)):
+        if(index < 10):
+            images[index] = '00' + str(index) + '.png'
+        elif(index < 100):
+            images[index] = '0' + str(index) + '.png'
+        else:
+            images[index] = str(index) + '.png'
+            
+    return images
 # print(import_csv_layout('data\levels\level0\INTRO._Obstacles.csv'))

@@ -32,12 +32,12 @@ class Level:
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites],'invisible')
                         #draw obstacles on map that are visible and colidable (this is where draw error is happening)
-                        if style == 'obstacles':                                         
+                        elif style == 'obstacles':                                         
                             surf = graphics['tileset'][int(col)]
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'obstacles',surf)
-                        # if style == 'old_tree':                                         
-                        #     surf = graphics['tutorial'][int(col)]
-                        #     Tile((x,y),[self.visible_sprites],'old_tree',surf)
+                        elif style == 'old_tree':                                         
+                            surf = graphics['tileset'][int(col)]
+                            Tile((x,y),[self.visible_sprites],'old_tree',surf)
         #         if col == 'x':
         #             Tile((x,y),[self.visible_sprites, self.obstacle_sprites])
         #         elif col == 'p':
