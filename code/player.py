@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from pygame.locals import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos,groups,obstacle_sprites):
@@ -10,8 +11,10 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.speed = 5
         self.obstacle_sprites = obstacle_sprites
-
+        # self.walking_up = [pygame.image.load('graphics/player/walking/tile001.png'),pygame.image.load('graphics/player/walking/tile005.png'),pygame.image.load('graphics/player/walking/tile009.png'),pygame.image.load('graphics/player/walking/tile013.png')]
+        # self.clock = pygame.time.Clock()
     def input(self):
+        index = 0
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
