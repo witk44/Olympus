@@ -11,15 +11,21 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.speed = 5
         self.obstacle_sprites = obstacle_sprites
-        # self.walking_up = [pygame.image.load('graphics/player/walking/tile001.png'),pygame.image.load('graphics/player/walking/tile005.png'),pygame.image.load('graphics/player/walking/tile009.png'),pygame.image.load('graphics/player/walking/tile013.png')]
-        # self.clock = pygame.time.Clock()
+        self.animation_index = 0
+        self.walking_up = [pygame.image.load('graphics/player/walking/tile001.png'),pygame.image.load('graphics/player/walking/tile005.png'),pygame.image.load('graphics/player/walking/tile009.png'),pygame.image.load('graphics/player/walking/tile013.png')]
+        self.clock = pygame.time.Clock()
     def input(self):
-        index = 0
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
         if keys[pygame.K_UP] or keys[pygame.K_w]:
+
+            if self.animation_index >= len(self.walking_up):
+                self.animation_index = 0
             self.direction.y = -1
+            self.clock.tick(18)
+            self.image = self.walking_up[self.animation_index]
+            self.animation_index +=1
         elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.direction.y = 1
         else:
