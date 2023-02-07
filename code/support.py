@@ -27,7 +27,7 @@ def custom_sort(images):
         elif(index < 100):
             images[index] = '0' + str(index) + '.png'
         else:
-            images[index] = str(index) + '.png'
+            images[index] = str(index) + '.png' 
             
     return images
 # print(import_csv_layout('data\levels\level0\INTRO._Obstacles.csv'))
