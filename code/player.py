@@ -76,6 +76,8 @@ class Player(pygame.sprite.Sprite):
         self.walking_right = create_animation("walking","right")
         self.walking_left = create_animation("walking","left")
         self.clock = pygame.time.Clock()
+        self.facing = "S"
+        self.attack_animations = [pygame.image.load('graphics/player/attacking/tile000.png'),pygame.image.load('graphics/player/attacking/tile001.png'),pygame.image.load('graphics/player/attacking/tile002.png'),pygame.image.load('graphics/player/attacking/tile003.png')]
     def input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
@@ -85,39 +87,48 @@ class Player(pygame.sprite.Sprite):
             if self.animation_index >= len(self.walking_up):
                 self.animation_index = 0
             self.direction.y = -1
-            self.clock.tick(FPS)
+            # self.clock.tick(FPS)
             self.image = self.walking_up[self.animation_index]
             self.animation_index +=1
+            self.facing = "N"
         elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
             if self.animation_index >= len(self.walking_up):
                 self.animation_index = 0
             self.direction.y = 1
-            self.clock.tick(FPS)
+            # self.clock.tick(FPS)
             self.image = self.walking_down[self.animation_index]
             self.animation_index +=1
+            self.facing = "S"
         else:
             self.direction.y = 0
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             if self.animation_index >= len(self.walking_up):
                 self.animation_index = 0
             self.direction.x = -1
-            if not (keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_DOWN] or keys[pygame.K_s]):
-                self.clock.tick(FPS)
+            # if not (keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_DOWN] or keys[pygame.K_s]):
+                # self.clock.tick(FPS)
             self.image = self.walking_left[self.animation_index]
             self.animation_index +=1
+            self.facing = "W"
         elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             if self.animation_index >= len(self.walking_up):
                 self.animation_index = 0
             self.direction.x = 1
-            if not (keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_DOWN] or keys[pygame.K_s]):
-                self.clock.tick(FPS)
+            # if not (keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_DOWN] or keys[pygame.K_s]):
+                # self.clock.tick(FPS)
             self.image = self.walking_right[self.animation_index]
             self.animation_index +=1
+            self.facing = "E"
         else:
             self.direction.x = 0
 
         #attack input
-
+        if  keys[pygame.K_j]:
+            if self.facing == "N":
+                temp = self.image
+                self.image = self.attack_animations[1]
+                
+            
         #special ability input
 
         
