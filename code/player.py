@@ -60,6 +60,13 @@ def create_animation(action,direction = None):
                         walking_left.append(pygame.image.load('graphics/player/walking/tile014.png'))
                     int+=1
                 return walking_left
+        elif(action == "idle"):
+            idle = []
+            idle.append(pygame.image.load('graphics/player/idle/tile000.png'))
+            idle.append(pygame.image.load('graphics/player/idle/tile001.png'))
+            idle.append(pygame.image.load('graphics/player/idle/tile002.png'))
+            idle.append(pygame.image.load('graphics/player/idle/tile003.png'))
+            return idle
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos,groups,obstacle_sprites):
@@ -75,11 +82,12 @@ class Player(pygame.sprite.Sprite):
         self.walking_down = create_animation("walking","down")
         self.walking_right = create_animation("walking","right")
         self.walking_left = create_animation("walking","left")
+        self.idle = create_animation("idle")
         self.clock = pygame.time.Clock()
         self.facing = "S"
         self.attack_animations = [pygame.image.load('graphics/player/attacking/tile000.png'),pygame.image.load('graphics/player/attacking/tile001.png'),pygame.image.load('graphics/player/attacking/tile002.png'),pygame.image.load('graphics/player/attacking/tile003.png')]
     def input(self):
-        keys = pygame.key.get_pressed()
+        keys = pygame.key.get_pressed()  
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
         if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -101,6 +109,10 @@ class Player(pygame.sprite.Sprite):
             self.facing = "S"
         else:
             self.direction.y = 0
+            if(self.facing == 'N'):
+                self.image = self.idle[1]
+            elif(self.facing == 'S'):
+                self.image = self.idle[0]
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             if self.animation_index >= len(self.walking_up):
                 self.animation_index = 0
@@ -121,6 +133,10 @@ class Player(pygame.sprite.Sprite):
             self.facing = "E"
         else:
             self.direction.x = 0
+            if(self.facing == 'E'):
+                self.image = self.idle[3]
+            elif(self.facing == 'W'):
+                self.image = self.idle[2]
 
         #attack input
         if  keys[pygame.K_j]:
