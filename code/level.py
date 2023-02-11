@@ -5,6 +5,7 @@ from player import Player
 from debug import debug
 from support import *
 from weapon import Weapon
+from UI import UI
 class Level:
     def __init__(self) -> None:
         # get the display surface
@@ -12,11 +13,17 @@ class Level:
         # sprite group setup
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
-        #sprite setup
-        self.create_map()
 
         #attack sprites
         self.current_attack = None
+
+        #sprite setup
+        self.create_map()
+
+        #ui
+        self.ui = UI()
+
+        
 
     def create_map(self):
         layouts = {
@@ -59,6 +66,7 @@ class Level:
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
         debug(self.player.status)
+        self.ui.display(self.player)
 
 
 class YSortCameraGroup(pygame.sprite.Group):

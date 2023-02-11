@@ -16,7 +16,6 @@ class Player(pygame.sprite.Sprite):
         self.animation_speed = 0.15
         #movement
         self.direction = pygame.math.Vector2()
-        self.speed = 5
         self.attacking = False
         self.attack_cooldown = 400
         self.attack_time = None
@@ -31,8 +30,14 @@ class Player(pygame.sprite.Sprite):
         self.destroy_attack = destroy_attack
         self.weapon_index = 0
         self.weapon = list(weapon_data.keys())[self.weapon_index]
-        
 
+        #stats
+        self.stats = {"health": 100, "energy": 60, "attack": 10, "magic":4, "speed": 4.5}
+        self.health = self.stats['health']
+        self.energy = self.stats['energy']
+        self.exp = 123
+        self.speed = self.stats['speed']
+                
         
 
        
