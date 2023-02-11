@@ -27,3 +27,7 @@ weapon_data = {
     'axe': {'cooldown': 300, 'damage': 20, 'graphic':'graphics/weapons/axe/full.png'},
     'katana':{'cooldown': 50, 'damage': 8, 'graphic':'graphics/weapons/katana/full.png'},
     'lance':{'cooldown': 150, 'damage': 10, 'graphic':'graphics/weapons/lance/full.png'}}
+
+magic_data = {
+    'lightning': {'strength': 5,'cost': 20,'graphic':'graphics/particles/lightning_ball/tile000.png'},
+    'heal' : {'strength': 20,'cost': 10,'graphic':'graphics/particles/heal/tile000.png'}}
