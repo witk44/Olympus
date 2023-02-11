@@ -4,6 +4,7 @@ from tile import Tile
 from player import Player
 from debug import debug
 from support import *
+from weapon import Weapon
 class Level:
     def __init__(self) -> None:
         # get the display surface
@@ -11,7 +12,11 @@ class Level:
         # sprite group setup
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
+        #sprite setup
         self.create_map()
+
+        #attack sprites
+        self.current_attack = None
 
     def create_map(self):
         layouts = {
@@ -38,13 +43,22 @@ class Level:
                         elif style == 'old_tree':                                         
                             surf = graphics['tileset'][int(col)]
                             Tile((x,y),[self.visible_sprites],'old_tree',surf)
-        self.player = Player((400,300),[self.visible_sprites],self.obstacle_sprites)
+        self.player = Player((400,300),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack)
             
+
+    def destroy_attack(self):
+        if self.current_attack:
+            self.current_attack.kill()
+        self.current_attack = None
+
+    def create_attack(self):
+        self.current_attack = Weapon(self.player,[self.visible_sprites])
 
     def run(self):
         #update and draw game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
+        debug(self.player.status)
 
 
 class YSortCameraGroup(pygame.sprite.Group):
