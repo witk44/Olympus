@@ -25,8 +25,12 @@ In terminal: pip install pygame
     unzip project folder to desired folder location
 
 # Run project
-    In root directory of project (../Olympus) run: py .\code\main.py  
+    In root directory of project (../Olympus) run: py .\code\main.py  or python .\code\main.py
     project will then load 
-    arrow keys move player 
-    close window by pressing the x in top right of window, esc key close will so be implemented 
+    arrow keys or awsd move player 
+    LShift changes weapon
+    RShift changes spell
+    LClick weapon attack
+    RClick cast spell
+    close window by pressing the x in top right of window or esc key 
 
