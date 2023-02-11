@@ -8,10 +8,11 @@ def import_csv_layout(path):
         for row in layout:
             terrain_map.append(list(row))
         return terrain_map
-def import_folder(path):
+def import_folder(path,sort = False):
     surface_list = []
     for _,__,image_files in walk(path):
-        image_files = custom_sort(image_files)
+        if sort:
+            image_files = custom_sort(image_files)
         for image in image_files:
             full_path = path + "/" + image
             image_surface = pygame.image.load(full_path).convert_alpha()

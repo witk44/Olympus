@@ -20,7 +20,7 @@ class Level:
             'old_tree': import_csv_layout('data\levels\level0\INTRO._Tree.csv')
         }
         graphics = {
-            'tileset':import_folder('graphics/tileset'),
+            'tileset':import_folder('graphics/tileset',True),
             # 'tutorial':import_folder('graphics/tutorial')
         }
         for style,layout in layouts.items():
