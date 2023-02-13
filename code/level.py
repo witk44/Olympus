@@ -6,6 +6,7 @@ from debug import debug
 from support import *
 from weapon import Weapon
 from UI import UI
+from enemy import Enemy
 class Level:
     def __init__(self) -> None:
         # get the display surface
@@ -29,7 +30,9 @@ class Level:
         layouts = {
             'boundary': import_csv_layout('data/levels/level0/INTRO._FloorBlocks.csv'),
             'obstacles': import_csv_layout('data\levels\level0\INTRO._Obstacles.csv'),
-            'old_tree': import_csv_layout('data\levels\level0\INTRO._Tree.csv')
+            'old_tree': import_csv_layout('data\levels\level0\INTRO._Tree.csv'),
+            'entities': import_csv_layout('data\levels\level0\INTRO._Enemy.csv'),
+            'player': import_csv_layout('data\levels\level0\INTRO._Player.csv')
         }
         graphics = {
             'tileset':import_folder('graphics/tileset',True),
@@ -50,7 +53,12 @@ class Level:
                         elif style == 'old_tree':                                         
                             surf = graphics['tileset'][int(col)]
                             Tile((x,y),[self.visible_sprites],'old_tree',surf)
-        self.player = Player((400,300),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
+                        elif style == 'entities':
+                            if col == '0':
+                                Enemy('bamboo',(x,y),[self.visible_sprites])
+                        elif style == 'player':
+                            if col == '0':
+                                self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
             
 
     def destroy_attack(self):
