@@ -55,7 +55,7 @@ class Level:
                             Tile((x,y),[self.visible_sprites],'old_tree',surf)
                         elif style == 'entities':
                             if col == '0':
-                                Enemy('bamboo',(x,y),[self.visible_sprites],self.obstacle_sprites)
+                                Enemy('raccoon',(x,y),[self.visible_sprites],self.obstacle_sprites)
                         elif style == 'player':
                             if col == '0':
                                 self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
@@ -107,7 +107,6 @@ class YSortCameraGroup(pygame.sprite.Group):
             self.display_surface.blit(sprite.image,offset_position)
 
     def enemy_update(self,player):
-        enemy_sprites = [
-        ]
-        for enemy in [sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type == 'enemy']:
+        enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type == 'enemy']
+        for enemy in enemy_sprites:
             enemy.enemy_update(player)
