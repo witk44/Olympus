@@ -78,6 +78,8 @@ class Level:
                     for target_sprite in collision_sprites:
                         if target_sprite.sprite_type == 'grass':
                             target_sprite.kill()
+                        else:
+                            target_sprite.get_damge(self.player,attack_sprite.sprite_type)
     def create_attack(self):
         self.current_attack = Weapon(self.player,[self.visible_sprites,self.attack_sprites])
 
