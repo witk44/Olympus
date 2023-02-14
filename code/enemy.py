@@ -63,7 +63,6 @@ class Enemy(Entity):
     def actions(self,player):
         if self.status == 'attack':
             self.attack_time = pygame.time.get_ticks()
-            print('attack')
         elif self.status == 'move':
             self.direction = self.get_player_location(player)[1]
         else:
@@ -86,7 +85,8 @@ class Enemy(Entity):
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.can_attack = True
 
-    def get_damge(player,attack_type):
+    def get_damge(self,player,attack_type):
+        print(attack_type)
         pass
 
     def update(self):
