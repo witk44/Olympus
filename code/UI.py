@@ -60,13 +60,13 @@ class UI:
             pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect,3)
             return bg_rect
     def weapon_overlay(self,weapon_index,has_switched):
-        bg_rect = self.selection_box(10,690,has_switched)
+        bg_rect = self.selection_box(10,HEIGHT-ITEM_BOX_SIZE,has_switched)
         weapon_surface = self.weapon_graphics[weapon_index]
         weapon_rect = weapon_surface.get_rect(center = bg_rect.center)
         self.display_surface.blit(weapon_surface,weapon_rect)
 
     def magic_overlay(self,magic_index,has_switched):
-        bg_rect = self.selection_box(92,700,has_switched)
+        bg_rect = self.selection_box(100,HEIGHT-ITEM_BOX_SIZE,has_switched)
         magic_surface = self.magic_graphics[magic_index]
         magic_rect = magic_surface.get_rect(center = bg_rect.center)
         self.display_surface.blit(magic_surface,magic_rect)

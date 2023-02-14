@@ -17,6 +17,8 @@ class Level:
 
         #attack sprites
         self.current_attack = None
+        self.attack_sprites = pygame.sprite.Group()
+        self.attackable_sprites = pygame.sprite.Group()
 
         #sprite setup
         self.create_map()
@@ -55,10 +57,12 @@ class Level:
                             Tile((x,y),[self.visible_sprites],'old_tree',surf)
                         elif style == 'entities':
                             if col == '0':
-                                Enemy('raccoon',(x,y),[self.visible_sprites],self.obstacle_sprites)
+                                Enemy('squid',(x,y),[self.visible_sprites,
+                                self.attackable_sprites],self.obstacle_sprites)
                         elif style == 'player':
                             if col == '0':
-                                self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
+                                self.player = Player((x,y),[self.visible_sprites],
+                                self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
             
 
     def destroy_attack(self):
@@ -66,8 +70,16 @@ class Level:
             self.current_attack.kill()
         self.current_attack = None
 
+    def player_attack_logic(self):
+        if self.attack_sprites:
+            for attack_sprite in self.attack_sprites:
+                collision_sprites = pygame.sprite.spritecollide(attack_sprite,self.attackable_sprites,False)
+                if collision_sprites:
+                    for target_sprite in collision_sprites:
+                        if target_sprite.sprite_type == 'grass':
+                            target_sprite.kill()
     def create_attack(self):
-        self.current_attack = Weapon(self.player,[self.visible_sprites])
+        self.current_attack = Weapon(self.player,[self.visible_sprites,self.attack_sprites])
 
     def create_magic(self,style,strength,cost):
         print(style)
@@ -79,6 +91,7 @@ class Level:
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
         self.visible_sprites.enemy_update(self.player)
+        self.player_attack_logic()
         self.ui.display(self.player)
 
 
