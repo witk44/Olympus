@@ -55,7 +55,7 @@ class Level:
                             Tile((x,y),[self.visible_sprites],'old_tree',surf)
                         elif style == 'entities':
                             if col == '0':
-                                Enemy('bamboo',(x,y),[self.visible_sprites])
+                                Enemy('bamboo',(x,y),[self.visible_sprites],self.obstacle_sprites)
                         elif style == 'player':
                             if col == '0':
                                 self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
@@ -78,7 +78,7 @@ class Level:
         #update and draw game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-        debug(self.player.status)
+        self.visible_sprites.enemy_update(self.player)
         self.ui.display(self.player)
 
 
@@ -105,3 +105,9 @@ class YSortCameraGroup(pygame.sprite.Group):
         for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
             offset_position = sprite.rect.topleft-self.offset
             self.display_surface.blit(sprite.image,offset_position)
+
+    def enemy_update(self,player):
+        enemy_sprites = [
+        ]
+        for enemy in [sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type == 'enemy']:
+            enemy.enemy_update(player)
