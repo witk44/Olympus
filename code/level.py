@@ -59,6 +59,15 @@ class Level:
                             if col == '0':
                                 Enemy('squid',(x,y),[self.visible_sprites,
                                 self.attackable_sprites],self.obstacle_sprites)
+                            elif col == '1':
+                                Enemy('raccoon',(x,y),[self.visible_sprites,
+                                self.attackable_sprites],self.obstacle_sprites)
+                            elif col == '2':
+                                Enemy('spirit',(x,y),[self.visible_sprites,
+                                self.attackable_sprites],self.obstacle_sprites)
+                            elif col == '3':
+                                Enemy('bamboo',(x,y),[self.visible_sprites,
+                                self.attackable_sprites],self.obstacle_sprites)
                         elif style == 'player':
                             if col == '0':
                                 self.player = Player((x,y),[self.visible_sprites],

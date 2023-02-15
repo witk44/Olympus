@@ -1,6 +1,6 @@
 WIDTH    = 1240
 HEIGHT   =  600  #800
-FPS      = 60
+FPS      = 90
 TILESIZE = 64
 
 BAR_HEIGHT = 20
