@@ -44,6 +44,10 @@ class Player(Entity):
         self.exp = 123
         self.speed = self.stats['speed']
                 
+        #damge timer
+        self.hittable = True
+        self.hurt_time = None
+        self.invulnerability_duration = 500
         
 
        
@@ -148,6 +152,11 @@ class Player(Entity):
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
+        if not self.hittable:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
 
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
@@ -161,6 +170,9 @@ class Player(Entity):
         elif not self.can_switch_magic:
             if current_time - self.magic_switch_time >= self.switch_duration_cooldown:
                 self.can_switch_magic = True
+        if not self.hittable:
+            if current_time - self.hurt_time >= self.invulnerability_duration:
+                self.hittable = True
                 
     def update(self):
         self.input()

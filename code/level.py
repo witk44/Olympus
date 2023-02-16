@@ -57,17 +57,19 @@ class Level:
                             Tile((x,y),[self.visible_sprites],'old_tree',surf)
                         elif style == 'entities':
                             if col == '0':
-                                Enemy('squid',(x,y),[self.visible_sprites,
-                                self.attackable_sprites],self.obstacle_sprites)
+                                monster_name = 'squid'
+                                
                             elif col == '1':
-                                Enemy('raccoon',(x,y),[self.visible_sprites,
-                                self.attackable_sprites],self.obstacle_sprites)
+                                monster_name = 'raccoon'
+                                
                             elif col == '2':
-                                Enemy('spirit',(x,y),[self.visible_sprites,
-                                self.attackable_sprites],self.obstacle_sprites)
+                                monster_name = 'spirit'
+                                
                             elif col == '3':
-                                Enemy('bamboo',(x,y),[self.visible_sprites,
-                                self.attackable_sprites],self.obstacle_sprites)
+                                monster_name = 'bamboo'
+                                
+                            Enemy(monster_name,(x,y),[self.visible_sprites,
+                                self.attackable_sprites],self.obstacle_sprites, self.damage_player)
                         elif style == 'player':
                             if col == '0':
                                 self.player = Player((x,y),[self.visible_sprites],
@@ -96,6 +98,13 @@ class Level:
         print(style)
         print(strength)
         print(cost)
+
+    def damage_player(self,amount,attack_type):
+        if self.player.hittable:
+            self.player.health -= amount
+            self.player.hittable = False
+            self.player.hurt_time = pygame.time.get_ticks()
+
 
     def run(self):
         #update and draw game
