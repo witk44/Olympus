@@ -7,7 +7,7 @@ from entity import Entity
 class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack,create_magic):
         super().__init__(groups)
-        self.image = pygame.image.load('graphics/player/player.png').convert_alpha()
+        self.image = pygame.image.load('../graphics/player/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-26)
         self.import_player_assets()
@@ -48,7 +48,7 @@ class Player(Entity):
 
        
     def import_player_assets(self):
-        character_path = 'graphics/player/'
+        character_path = '../graphics/player/'
         self.animations = {'up': [],'down': [],'left': [],'right': [],'right_idle': [],
                             'left_idle': [],'up_idle': [],'down_idle': [],'right_attack': [],
                             'left_attack': [],'up_attack': [],'down_attack': [],}
@@ -133,7 +133,10 @@ class Player(Entity):
             if 'attack' in self.status:
                 self.status = self.status('_attack', '')
 
-
+    def get_weapon_damage(self):
+        base_damage = self.stats['attack']
+        weapon_damage = weapon_data[self.weapon]['damage']
+        return base_damage + weapon_damage
     
 
     def animate(self):
@@ -149,7 +152,7 @@ class Player(Entity):
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
         if self.attacking:
-            if current_time - self.attack_time >= self.attack_cooldown:
+            if current_time - self.attack_time >= self.attack_cooldown + weapon_data[self.weapon]['cooldown'] :
                 self.attacking = False
                 self.destroy_attack()
         elif not self.can_switch_weapon:

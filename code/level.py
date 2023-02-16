@@ -30,14 +30,14 @@ class Level:
 
     def create_map(self):
         layouts = {
-            'boundary': import_csv_layout('data/levels/level0/INTRO._FloorBlocks.csv'),
-            'obstacles': import_csv_layout('data\levels\level0\INTRO._Obstacles.csv'),
-            'old_tree': import_csv_layout('data\levels\level0\INTRO._Tree.csv'),
-            'entities': import_csv_layout('data\levels\level0\INTRO._Enemy.csv'),
-            'player': import_csv_layout('data\levels\level0\INTRO._Player.csv')
+            'boundary': import_csv_layout('../data/levels/level0/INTRO._FloorBlocks.csv'),
+            'obstacles': import_csv_layout('../data\levels\level0\INTRO._Obstacles.csv'),
+            'old_tree': import_csv_layout('../data\levels\level0\INTRO._Tree.csv'),
+            'entities': import_csv_layout('../data\levels\level0\INTRO._Enemy.csv'),
+            'player': import_csv_layout('../data\levels\level0\INTRO._Player.csv')
         }
         graphics = {
-            'tileset':import_folder('graphics/tileset',True),
+            'tileset':import_folder('../graphics/tileset',True),
             # 'tutorial':import_folder('graphics/tutorial')
         }
         for style,layout in layouts.items():
@@ -120,7 +120,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset.x = player.rect.centerx - self.half_width
         self.offset.y = player.rect.centery - self.half_height
         #creating the floor
-        self.floor_surface = pygame.image.load('data\levels\level0\INTRO.png').convert()
+        self.floor_surface = pygame.image.load('..\data\levels\level0\INTRO.png').convert()
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
         #drawing the floor
         floor_offset_pos = self.floor_rect.topleft - self.offset
