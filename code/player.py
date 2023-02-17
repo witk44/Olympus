@@ -173,6 +173,12 @@ class Player(Entity):
         if not self.hittable:
             if current_time - self.hurt_time >= self.invulnerability_duration:
                 self.hittable = True
+
+    def energy_recovery(self):
+        if self.energy < self.stats['energy']:
+            self.energy += .01
+        else:
+            self.energy = self.stats['energy']
                 
     def update(self):
         self.input()
@@ -180,5 +186,5 @@ class Player(Entity):
         self.get_status()
         self.animate()
         self.move(self.speed)
-
+        self.energy_recovery()
     
