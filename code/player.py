@@ -141,7 +141,11 @@ class Player(Entity):
         base_damage = self.stats['attack']
         weapon_damage = weapon_data[self.weapon]['damage']
         return base_damage + weapon_damage
-    
+
+    def get_magic_damage(self):
+        base_damge = self.stats['magic']
+        spell_damage = magic_data[self.magic]['strength'] 
+        return base_damge + spell_damage
 
     def animate(self):
         animation = self.animations[self.status]

@@ -108,7 +108,7 @@ class Level:
         if style == 'heal':
             self.magic_player.heal(self.player,strength,cost,[self.visible_sprites])
         if style == 'lightning':
-            self.magic_player.lightning(self.player,cost,[self.visible_sprites])
+            self.magic_player.lightning(self.player,cost,[self.visible_sprites, self.attack_sprites])
         print(style)
         print(strength)
         print(cost)
