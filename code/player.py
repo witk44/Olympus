@@ -39,9 +39,11 @@ class Player(Entity):
 
         #stats
         self.stats = {"health": 100, "energy": 60, "attack": 10, "magic":4, "speed": 4}
+        self.max_stats = {"health": 400, "energy": 200, "attack": 25, "magic":10, "speed": 9}
+        self.upgrade_cost = {"health": 100, "energy": 100, "attack": 100, "magic":100, "speed": 100}
         self.health = self.stats['health']
         self.energy = self.stats['energy']
-        self.exp = 123
+        self.exp = 500
         self.speed = self.stats['speed']
                 
         #damge timer

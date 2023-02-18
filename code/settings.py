@@ -30,7 +30,7 @@ weapon_data = {
 
 magic_data = {
     'lightning': {'strength': 20,'cost': 20,'graphic':'../graphics/particles/lightning_ball/tile000.png'},
-    'heal' : {'strength': 10,'cost': 15,'graphic':'../graphics/particles/heal/tile000.png'}}
+    'heal' : {'strength': 10,'cost': 20,'graphic':'../graphics/particles/heal/tile000.png'}}
 
 monster_data = {
     'squid': {'health': 100,'exp':100,'damage':20,'attack_type': 'slash', 'attack_sound':'../audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 80, 'notice_radius': 360},

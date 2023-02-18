@@ -16,7 +16,7 @@ class MagicPlayer:
                 player.energy -= cost
                 player.health += strength
                 self.animation_player.create_particles('heal',player.rect.center,groups)
-        print('heal')
+            
     def lightning(self,player,cost,groups):
         if player.energy >= cost:
             player.energy-=cost
