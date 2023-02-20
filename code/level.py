@@ -14,6 +14,7 @@ from upgrade import Upgrade
 
 class Level:
     def __init__(self) -> None:
+        pygame.init()
         # get the display surface
         self.display_surface = pygame.display.get_surface()
         self.game_paused = False
@@ -27,6 +28,7 @@ class Level:
         self.attackable_sprites = pygame.sprite.Group()
 
         #sprite setup
+        
         self.create_map()
 
         #ui
@@ -38,11 +40,12 @@ class Level:
 
     def create_map(self):
         layouts = {
-            'boundary': import_csv_layout('../data/levels/level0/INTRO._FloorBlocks.csv'),
-            'obstacles': import_csv_layout('../data\levels\level0\INTRO._Obstacles.csv'),
-            'old_tree': import_csv_layout('../data\levels\level0\INTRO._Tree.csv'),
-            'entities': import_csv_layout('../data\levels\level0\INTRO._Enemy.csv'),
-            'player': import_csv_layout('../data\levels\level0\INTRO._Player.csv')
+            'boundary': import_csv_layout('../data/levels/tutorial/Tutorial._FloorBlocks.csv'),
+            # 'obstacles': import_csv_layout('../data/levels/tutorial/Tutorial._Obstacles.csv'),
+            'old_tree': import_csv_layout('../data/levels/tutorial/Tutorial._Tree.csv'),
+            'entities': import_csv_layout('../data/levels/tutorial/Tutorial._Enemy.csv'),
+            'player': import_csv_layout('../data/levels/tutorial/Tutorial._Player.csv'),
+            'grass': import_csv_layout('../data/levels/tutorial/Tutorial._Bush.csv')
         }
         graphics = {
             'tileset':import_folder('../graphics/tileset',True),
@@ -52,28 +55,39 @@ class Level:
             for row_index,row in enumerate(layout):
                 for col_index,col in enumerate(row):
                     if col != '-1':
+                        
                         x = col_index*TILESIZE
                         y = row_index*TILESIZE
                         if style == 'boundary':
                             Tile((x,y),[self.obstacle_sprites],'invisible')
+                            
                         #draw obstacles on map that are visible and colidable (this is where draw error is happening)
-                        elif style == 'obstacles':                                         
+                        # elif style == 'obstacles':                            
+                        #     surf = graphics['tileset'][int(col)]
+                        #     Tile((x,y),[self.visible_sprites],'obstacles',surf)
+                        # elif style == 'old_tree':                                         
+                        #     surf = graphics['tileset'][int(col)]
+                        #     Tile((x,y),[self.visible_sprites],'old_tree',surf)
+                        elif style == 'grass':
                             surf = graphics['tileset'][int(col)]
-                            Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'obstacles',surf)
-                        elif style == 'old_tree':                                         
-                            surf = graphics['tileset'][int(col)]
-                            Tile((x,y),[self.visible_sprites],'old_tree',surf)
+                            Tile(
+								(x,y),
+								[self.visible_sprites,self.obstacle_sprites,self.attackable_sprites],
+								'grass',
+								surf)
                         elif style == 'entities':
-                            if col == '0':
+                            pointer = randint(0,3)
+                            
+                            if pointer == 0:
                                 monster_name = 'squid'
                                 
-                            elif col == '1':
-                                monster_name = 'raccoon'
+                            elif pointer == 1:
+                                monster_name = 'squid'
                                 
-                            elif col == '2':
+                            elif pointer == 2:
                                 monster_name = 'spirit'
                                 
-                            elif col == '3':
+                            elif pointer == 3:
                                 monster_name = 'bamboo'
                                 
                             Enemy(monster_name,(x,y),[self.visible_sprites,
@@ -82,7 +96,9 @@ class Level:
                             if col == '0':
                                 self.player = Player((x,y),[self.visible_sprites],
                                 self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
-            
+                        else:
+                            surf = graphics['tileset'][int(col)]
+                            Tile((x,y),[self.visible_sprites],'obstacles',surf)
 
     def destroy_attack(self):
         if self.current_attack:
@@ -112,9 +128,7 @@ class Level:
             self.magic_player.heal(self.player,strength,cost,[self.visible_sprites])
         if style == 'lightning':
             self.magic_player.lightning(self.player,cost,[self.visible_sprites, self.attack_sprites])
-        print(style)
-        print(strength)
-        print(cost)
+
 
     def damage_player(self,amount,attack_type):
         if self.player.hittable:
@@ -122,7 +136,7 @@ class Level:
             self.player.hittable = False
             self.player.hurt_time = pygame.time.get_ticks()
             self.animation_player.create_particles(attack_type,self.player.rect.center,[self.visible_sprites])
-            if self.player.health <=0:self.player.health = 0
+            if self.player.health <=0:pygame.quit()
             
     def trigger_death_particles(self,pos,particle_type):
             self.animation_player.create_particles(particle_type,pos,[self.visible_sprites])
@@ -131,6 +145,13 @@ class Level:
         
         self.player.exp += amount
 
+    def within_update(self,sprite):
+        vec = pygame.math.Vector2(sprite.rect.center)
+        player_vec = pygame.math.Vector2(self.player.rect.center)
+        distance = (player_vec-vec).magnitude()
+        if distance <= UPDATE_RADIUS:
+            return True
+        return False
     def toggle_menu(self):
         self.game_paused = not self.game_paused
 
@@ -141,8 +162,11 @@ class Level:
             self.upgrade.display()
         else:
         #update and draw game
-            self.visible_sprites.update()
             self.visible_sprites.enemy_update(self.player)
+            for sprite in self.visible_sprites:
+                if self.within_update(sprite):
+                    sprite.update()
+            
             self.player_attack_logic()
        
 
@@ -153,7 +177,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.display_surface = pygame.display.get_surface()
         self.half_width = self.display_surface.get_size()[0] // 2
         self.half_height = self.display_surface.get_size()[1] // 2
-
+        self.floor_surface = pygame.image.load('../data/levels/tutorial/Tutorial.png').convert()
         self.offset = pygame.math.Vector2(100,200)
 
 
@@ -161,7 +185,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset.x = player.rect.centerx - self.half_width
         self.offset.y = player.rect.centery - self.half_height
         #creating the floor
-        self.floor_surface = pygame.image.load('..\data\levels\level0\INTRO.png').convert()
+        
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
         #drawing the floor
         floor_offset_pos = self.floor_rect.topleft - self.offset
@@ -174,4 +198,6 @@ class YSortCameraGroup(pygame.sprite.Group):
     def enemy_update(self,player):
         enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type == 'enemy']
         for enemy in enemy_sprites:
-            enemy.enemy_update(player)
+            distance = enemy.get_player_location(player)[0]
+            if distance <= enemy.update_radius:
+                enemy.enemy_update(player)
