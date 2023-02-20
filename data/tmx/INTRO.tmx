@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="../tsx/Tileset - Copy.tsx"/>
  <tileset firstgid="1121" source="../tsx/Player_setup.tsx"/>
  <tileset firstgid="1123" source="../tsx/enemy_setup.tsx"/>
- <layer id="1" name="Ground" width="15" height="15">
+ <layer id="1" name="Ground" width="15" height="15" visible="0">
   <data encoding="csv">
 332,332,332,332,332,332,332,332,332,332,332,332,332,332,332,
 332,332,332,332,332,332,332,332,332,332,332,332,332,332,332,
@@ -25,7 +25,7 @@
 332,332,332,332,332,332,332,332,332,332,332,332,332,332,332
 </data>
  </layer>
- <layer id="3" name="Bush" width="15" height="15">
+ <layer id="3" name="Bush" width="15" height="15" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -44,7 +44,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="6" name="FloorBlocks" width="15" height="15">
+ <layer id="6" name="FloorBlocks" width="15" height="15" visible="0">
   <data encoding="csv">
 1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,
 1124,1124,0,0,0,0,0,0,0,0,0,0,0,1124,1124,
@@ -63,7 +63,7 @@
 1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124,1124
 </data>
  </layer>
- <layer id="4" name="Player" width="15" height="15">
+ <layer id="4" name="Player" width="15" height="15" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,1122,0,0,0,0,0,0,0,
@@ -82,7 +82,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="5" name="Enemy" width="15" height="15">
+ <layer id="5" name="Enemy" width="15" height="15" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,1123,0,1123,0,0,0,0,0,0,
@@ -120,7 +120,7 @@
 0,0,764,764,764,764,764,764,764,764,764,764,764,0,0
 </data>
  </layer>
- <layer id="7" name="Tree" width="15" height="15">
+ <layer id="7" name="Tree" width="15" height="15" visible="0">
   <data encoding="csv">
 785,786,0,0,0,0,0,0,0,0,0,0,0,785,786,
 813,814,0,0,0,0,0,0,0,0,0,0,0,813,814,
