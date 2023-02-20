@@ -5,6 +5,7 @@ from level import Level
 class Game:
     def __init__(self) -> None:
         pygame.init()
+        pygame.display.init()
         self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
         pygame.display.set_caption("Olympus")
         self.clock = pygame.time.Clock()
@@ -17,6 +18,7 @@ class Game:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    pygame.display.quit()
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:

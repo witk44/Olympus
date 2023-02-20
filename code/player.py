@@ -1,4 +1,4 @@
-import pygame
+import pygame,sys
 from settings import *
 from pygame.locals import *
 from support import *
@@ -7,6 +7,7 @@ from entity import Entity
 class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack,create_magic):
         super().__init__(groups)
+        pygame.init()
         self.image = pygame.image.load('../graphics/player/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(-2,HITBOX_OFFSET['player'])
@@ -71,7 +72,7 @@ class Player(Entity):
         if not self.attacking:
             keys = pygame.key.get_pressed()  
             if keys[pygame.K_ESCAPE]:
-                pygame.quit()
+                self.kill()
             if keys[pygame.K_UP] or keys[pygame.K_w]:
                 self.direction.y = -1
                 self.status = 'up'

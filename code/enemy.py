@@ -6,6 +6,7 @@ from support import *
 class Enemy(Entity):
     def __init__(self, monster_name,pos,groups,obstacle_sprites,damage_player,trigger_death_particles,add_xp):
         super().__init__(groups)
+        pygame.init()
         self.sprite_type = 'enemy'
         self.status = 'idle'
         self.import_graphics(monster_name)

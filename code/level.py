@@ -1,4 +1,4 @@
-import pygame
+import pygame,sys
 from settings import *
 from tile import Tile
 from player import Player
@@ -26,7 +26,7 @@ class Level:
         self.current_attack = None
         self.attack_sprites = pygame.sprite.Group()
         self.attackable_sprites = pygame.sprite.Group()
-
+        self.first_create = True
         #sprite setup
         
         self.create_map()
@@ -82,7 +82,7 @@ class Level:
                                 monster_name = 'squid'
                                 
                             elif pointer == 1:
-                                monster_name = 'squid'
+                                monster_name = 'cyclops'
                                 
                             elif pointer == 2:
                                 monster_name = 'spirit'
@@ -136,8 +136,9 @@ class Level:
             self.player.hittable = False
             self.player.hurt_time = pygame.time.get_ticks()
             self.animation_player.create_particles(attack_type,self.player.rect.center,[self.visible_sprites])
-            if self.player.health <=0:pygame.quit()
-            
+            if self.player.health <=0:
+                self.player.destroy_attack()
+                self.player.kill()
     def trigger_death_particles(self,pos,particle_type):
             self.animation_player.create_particles(particle_type,pos,[self.visible_sprites])
 
@@ -164,10 +165,11 @@ class Level:
         #update and draw game
             self.visible_sprites.enemy_update(self.player)
             for sprite in self.visible_sprites:
-                if self.within_update(sprite):
+                if self.within_update(sprite) or self.first_create:
                     sprite.update()
             
             self.player_attack_logic()
+            self.first_create = False
        
 
 
