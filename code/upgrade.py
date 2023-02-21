@@ -99,8 +99,8 @@ class Item:
         upgrade_attribute = list(player.stats.keys())[self.index]
         if player.exp >= player.upgrade_cost[upgrade_attribute] and player.stats[upgrade_attribute] < player.max_stats[upgrade_attribute]:
             player.exp -= player.upgrade_cost[upgrade_attribute]
-            player.stats[upgrade_attribute] *= 1.3
-            player.upgrade_cost[upgrade_attribute] *= 1.4
+            player.stats[upgrade_attribute] = player.stats[upgrade_attribute]*1.5
+            player.upgrade_cost[upgrade_attribute] = player.upgrade_cost[upgrade_attribute]*1.8
             player.upgrade_current_attribute(upgrade_attribute)
         
         if player.stats[upgrade_attribute] > player.max_stats[upgrade_attribute]:

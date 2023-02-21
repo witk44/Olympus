@@ -35,16 +35,18 @@ class Player(Entity):
         self.create_magic = create_magic
         self.magic_index = 0
         self.magic = list(magic_data.keys())[self.magic_index]
+
         self.can_switch_magic = True
         self.magic_switch_time = None
 
 
         #stats
         self.stats = {"health": 100, "energy": 60, "attack": 10, "magic":4, "speed": 4}
-        self.max_stats = {"health": 400, "energy": 200, "attack": 25, "magic":10, "speed": 9}
+        self.max_stats = {"health": 400, "energy": 200, "attack": 100, "magic":100, "speed": 9}
         self.upgrade_cost = {"health": 100, "energy": 100, "attack": 100, "magic":100, "speed": 100}
         self.health = self.stats['health']
         self.energy = self.stats['energy']
+        self.spell_dmg  = self.stats['magic']
         self.exp = 0
         self.speed = self.stats['speed']
                 
@@ -105,7 +107,7 @@ class Player(Entity):
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 style = list(magic_data.keys())[self.magic_index]
-                strength = list(magic_data.values())[self.magic_index]["strength"] + self.stats['magic']
+                strength = list(magic_data.values())[self.magic_index]["strength"] + self.spell_dmg
                 cost = list(magic_data.values())[self.magic_index]["cost"]
                 self.create_magic(style,strength,cost)
 
@@ -152,7 +154,7 @@ class Player(Entity):
         return base_damage + weapon_damage
 
     def get_magic_damage(self):
-        base_damge = self.stats['magic']
+        base_damge = self.spell_dmg
         spell_damage = magic_data[self.magic]['strength'] 
         return base_damge + spell_damage
 
@@ -205,7 +207,7 @@ class Player(Entity):
             self.health = self.stats[upgrade_attribute]
             
         elif upgrade_attribute == 'magic':
-            self.magic = self.stats[upgrade_attribute]
+            self.spell_dmg = self.stats[upgrade_attribute]
             
         elif upgrade_attribute == 'attack':
             self.attack = self.stats[upgrade_attribute]
