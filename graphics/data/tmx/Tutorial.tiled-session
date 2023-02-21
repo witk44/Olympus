@@ -1,0 +1,60 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "controls.tsx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "C:/Users/Connor/Documents/Olympus/data/tsx/Player_setup.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Connor/Documents/Olympus/data/tsx/Tileset - Copy.tsx": {
+            "scaleInDock": 0.25
+        },
+        "C:/Users/Connor/Documents/Olympus/data/tsx/TilesetElement.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Connor/Documents/Olympus/data/tsx/enemy_setup.tsx": {
+            "scaleInDock": 1
+        },
+        "Tutorial.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1477.2727272727273,
+                "y": 4545.454545454546
+            }
+        },
+        "controls.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/Connor/Documents/Olympus/data/levels/tutorial",
+    "last.externalTilesetPath": "C:/Users/Connor/Documents/Olympus/data/tsx",
+    "last.imagePath": "C:/Users/Connor/Documents/Olympus/graphics",
+    "map.height": 100,
+    "map.lastUsedExportFilter": "CSV files (*.csv)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 50,
+    "openFiles": [
+        "Tutorial.tmx",
+        "controls.tsx"
+    ],
+    "project": "Tutorial.tiled-project",
+    "recentFiles": [
+        "Tutorial.tmx",
+        "controls.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
