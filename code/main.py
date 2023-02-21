@@ -24,7 +24,7 @@ class Game:
     def run(self):
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == pygame.QUIT or not self.level.player.alive:
                     pygame.display.quit()
                     pygame.quit()
                     sys.exit()

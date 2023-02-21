@@ -139,6 +139,7 @@ class Level:
             if self.player.health <=0:
                 self.player.destroy_attack()
                 self.player.kill()
+                self.player.alive = False
     def trigger_death_particles(self,pos,particle_type):
             self.animation_player.create_particles(particle_type,pos,[self.visible_sprites])
 

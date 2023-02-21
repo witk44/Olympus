@@ -13,7 +13,7 @@ class Player(Entity):
         self.hitbox = self.rect.inflate(-2,HITBOX_OFFSET['player'])
         self.import_player_assets()
         self.status = 'down'
-        
+        self.alive = True
         #movement
         self.attacking = False
         self.attack_cooldown = 400
@@ -73,6 +73,7 @@ class Player(Entity):
             keys = pygame.key.get_pressed()  
             if keys[pygame.K_ESCAPE]:
                 self.kill()
+                self.alive = False
             if keys[pygame.K_UP] or keys[pygame.K_w]:
                 self.direction.y = -1
                 self.status = 'up'
