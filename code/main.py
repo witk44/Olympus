@@ -13,7 +13,7 @@ class Game:
     def __init__(self) -> None:
         pygame.init()
         pygame.display.init()
-        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
+        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
         pygame.display.set_caption("Olympus")
         self.clock = pygame.time.Clock()
         self.level = Level()
