@@ -1,5 +1,9 @@
-WIDTH    = 1240
-HEIGHT   =  680  #800
+import pygame
+screen = pygame.display.set_mode()
+WIDTH, HEIGHT = screen.get_size()
+
+# WIDTH    = 1240
+# HEIGHT   =  680  #800
 FPS      = 90
 TILESIZE = 64
 HITBOX_OFFSET ={
