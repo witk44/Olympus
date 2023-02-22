@@ -7,11 +7,6 @@ Python version 3.10, https://www.python.org/downloads/release/python-3100/ \
 Confirm python in terminal: py --version or py3 --version \
 In terminal: pip install pygame
 
-# Prerequisites (game enjoyer)
-Python version 3.10, https://www.python.org/downloads/release/python-3100/ \
-Confirm python in terminal: py --version or py3 --version \
-In terminal: pip install pygame
-
 
 # Clone Repository
 ### Option 1
@@ -25,7 +20,7 @@ In terminal: pip install pygame
     unzip project folder to desired folder location
 
 # Run project
-    In root directory of project (../Olympus) run: py .\code\main.py  or python .\code\main.py
+    In code directory of project (../Olympus/code) run: py main.py  or python smain.py
     project will then load 
     arrow keys or awsd move player 
     LShift changes weapon
@@ -34,3 +29,5 @@ In terminal: pip install pygame
     RClick cast spell
     close window by pressing the x in top right of window or esc key 
 
+#Run Project Option2 
+    In the root directory of the project simply run the sortcut named Olympus
