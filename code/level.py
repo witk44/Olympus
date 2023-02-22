@@ -91,11 +91,11 @@ class Level:
                                 monster_name = 'bamboo'
                                 
                             Enemy(monster_name,(x,y),[self.visible_sprites,
-                                self.attackable_sprites],self.obstacle_sprites, self.damage_player, self.trigger_death_particles,self.add_xp)
+                                self.attackable_sprites],self.obstacle_sprites, self.attackable_sprites,self.damage_player, self.trigger_death_particles,self.add_xp)
                         elif style == 'player':
                             if col == '0':
                                 self.player = Player((x,y),[self.visible_sprites],
-                                self.obstacle_sprites,self.create_attack,self.destroy_attack, self.create_magic)
+                                self.obstacle_sprites,self.attackable_sprites,self.create_attack,self.destroy_attack, self.create_magic)
                         else:
                             surf = graphics['tileset'][int(col)]
                             Tile((x,y),[self.visible_sprites],'obstacles',surf)

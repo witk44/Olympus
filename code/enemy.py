@@ -4,7 +4,7 @@ from entity import Entity
 from support import *
 
 class Enemy(Entity):
-    def __init__(self, monster_name,pos,groups,obstacle_sprites,damage_player,trigger_death_particles,add_xp):
+    def __init__(self, monster_name,pos,groups,obstacle_sprites,attackable_sprites,damage_player,trigger_death_particles,add_xp):
         super().__init__(groups)
         pygame.init()
         self.sprite_type = 'enemy'
@@ -12,8 +12,9 @@ class Enemy(Entity):
         self.import_graphics(monster_name)
         self.image = self.animations[self.status][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect.inflate(0,-10)
+        self.hitbox = self.rect.inflate(0,-5)
         self.obstacle_sprites = obstacle_sprites
+        self.attackable_sprites = attackable_sprites
         self.add_xp = add_xp
 
         self.monster_name = monster_name
@@ -64,7 +65,6 @@ class Enemy(Entity):
 
     def get_status(self,player):
         distance = self.get_player_location(player)[0]
-
         if distance <= self.attack_radius and self.can_attack:
             if self.status !='attack':
                 self.frame_index = 0
@@ -135,6 +135,14 @@ class Enemy(Entity):
     def hit_reaction(self):
         if not self.hittable:
             self.direction *= -self.resistance
+    
+    def connected_to_player(self,player):
+        enemy_x = self.rect.x
+        enemy_y = self.rect.y
+        player_x = player.rect.x
+        player_y = player.rect.y
+        if ((enemy_x - player_x) in range(-1,1)) and ((enemy_y - player_y) in range(-1,1)):
+            pass
 
     def update(self):
         self.hit_reaction()
@@ -143,6 +151,7 @@ class Enemy(Entity):
         self.cooldowns()
         
     def enemy_update(self,player):
+        self.connected_to_player(player)
         self.get_status(player)
         self.actions(player)
         self.check_death()
