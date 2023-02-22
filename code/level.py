@@ -94,7 +94,7 @@ class Level:
                                 self.attackable_sprites],self.obstacle_sprites, self.attackable_sprites,self.damage_player, self.trigger_death_particles,self.add_xp)
                         elif style == 'player':
                             if col == '0':
-                                self.player = Player((x,y),[self.visible_sprites],
+                                self.player = Player((x,y),[self.visible_sprites,self.attackable_sprites],
                                 self.obstacle_sprites,self.attackable_sprites,self.create_attack,self.destroy_attack, self.create_magic)
                         else:
                             surf = graphics['tileset'][int(col)]
