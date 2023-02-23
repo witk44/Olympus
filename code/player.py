@@ -15,6 +15,7 @@ class Player(Entity):
         self.import_player_assets()
         self.status = 'down'
         self.alive = True
+        self.escape_key = False
         #movement
         self.attacking = False
         self.attack_cooldown = 400
@@ -70,14 +71,13 @@ class Player(Entity):
         for animation in self.animations.keys():
             full_path = character_path + animation
             self.animations[animation] = import_folder(full_path)
-        
 
     def input(self):
         if not self.attacking:
             keys = pygame.key.get_pressed()  
             if keys[pygame.K_ESCAPE]:
                 self.kill()
-                self.alive = False
+                self.escape_key = True
             if keys[pygame.K_UP] or keys[pygame.K_w]:
                 self.direction.y = -1
                 self.status = 'up'

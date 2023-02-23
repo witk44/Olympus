@@ -24,7 +24,11 @@ class Game:
     def run(self):
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT or not self.level.player.alive:
+                if self.level.player.escape_key:
+                    pygame.display.quit()
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.QUIT:
                     pygame.display.quit()
                     pygame.quit()
                     sys.exit()

@@ -11,6 +11,8 @@ from enemy import Enemy
 from particles import AnimationPlayer
 from magic import *
 from upgrade import Upgrade
+from death import DeathScreen
+
 
 class Level:
     def __init__(self) -> None:
@@ -34,7 +36,7 @@ class Level:
         #ui
         self.ui = UI()
         self.upgrade = Upgrade(self.player)
-    
+        self.death_screen = DeathScreen()
         self.animation_player = AnimationPlayer()
         self.magic_player = MagicPlayer(self.animation_player)
 
@@ -162,6 +164,8 @@ class Level:
         self.ui.display(self.player)
         if self.game_paused:
             self.upgrade.display()
+        elif not self.player.alive:
+            self.death_screen.display()
         else:
         #update and draw game
             self.visible_sprites.enemy_update(self.player)
