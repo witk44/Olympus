@@ -16,9 +16,10 @@ class Player(Entity):
         self.status = 'down'
         self.alive = True
         self.escape_key = False
+        self.last_key_pressed = None
         #movement
         self.attacking = False
-        self.attack_cooldown = 400
+        self.attack_cooldown = 300
         self.attack_time = None
         self.obstacle_sprites = obstacle_sprites
         self.attackable_sprites = attackable_sprites
@@ -56,7 +57,7 @@ class Player(Entity):
         #damge timer
         self.hittable = True
         self.hurt_time = None
-        self.invulnerability_duration = 500
+        self.invulnerability_duration = 600
 
         self.weapon_attack_sound = pygame.mixer.Sound('../audio/sword.wav')
         self.weapon_attack_sound.set_volume(0.3)
@@ -75,7 +76,7 @@ class Player(Entity):
     def input(self):
         if not self.attacking:
             keys = pygame.key.get_pressed()  
-            if keys[pygame.K_ESCAPE]:
+            if keys[pygame.K_ESCAPE] :
                 self.kill()
                 self.escape_key = True
             if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -91,7 +92,6 @@ class Player(Entity):
                 self.status = 'left'
                 
             elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-                
                 self.direction.x = 1
                 self.status = 'right'
                 
@@ -100,12 +100,12 @@ class Player(Entity):
             
             left, middle, right = pygame.mouse.get_pressed()
             #attack input
-            if  left:
+            if  left and not self.attacking:
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 self.create_attack()
                 self.weapon_attack_sound.play()
-            elif  right:
+            elif  right and not self.attacking:
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 style = list(magic_data.keys())[self.magic_index]
@@ -122,7 +122,7 @@ class Player(Entity):
                 else:
                     self.weapon_index = 0
                 self.weapon = list(weapon_data.keys())[self.weapon_index]
-            if keys[K_RSHIFT] and self.can_switch_magic:
+            elif keys[K_RSHIFT] and self.can_switch_magic:
                 self.can_switch_magic = False
                 self.magic_switch_time = pygame.time.get_ticks()
                 
@@ -178,7 +178,7 @@ class Player(Entity):
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
         if self.attacking:
-            if current_time - self.attack_time >= self.attack_cooldown + weapon_data[self.weapon]['cooldown'] :
+            if current_time - self.attack_time >= self.attack_cooldown :
                 self.attacking = False
                 self.destroy_attack()
         elif not self.can_switch_weapon:

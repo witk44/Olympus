@@ -121,7 +121,9 @@ class Level:
                                 self.animation_player.create_grass_particles(pos-offset,[self.visible_sprites])
                             target_sprite.kill()
                         else:
-                            target_sprite.get_damge(self.player,attack_sprite.sprite_type)
+                            if target_sprite.sprite_type != 'player':
+                                target_sprite.get_damge(self.player,attack_sprite.sprite_type)
+                        
     def create_attack(self):
         self.current_attack = Weapon(self.player,[self.visible_sprites,self.attack_sprites])
 

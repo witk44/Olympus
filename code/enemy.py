@@ -30,7 +30,7 @@ class Enemy(Entity):
 
         self.can_attack = True
         self.attack_time = None
-        self.attack_cooldown = 400 #may put in monster data later
+        self.attack_cooldown = 500 #may put in monster data later
         self.damage_player = damage_player
         self.trigger_death_particles = trigger_death_particles
         self.update_radius = UPDATE_RADIUS
@@ -134,15 +134,17 @@ class Enemy(Entity):
 
     def hit_reaction(self):
         if not self.hittable:
-            self.direction *= -self.resistance
+            if self.direction.x > 0:
+                self.direction.x -= self.resistance
+            elif self.direction.x < 0:
+                self.direction.x += self.resistance
+            if self.direction.y > 0:
+                self.direction.y -= self.resistance
+            elif self.direction.y < 0:
+                self.direction.y += self.resistance
+            
     
-    def connected_to_player(self,player):
-        enemy_x = self.rect.x
-        enemy_y = self.rect.y
-        player_x = player.rect.x
-        player_y = player.rect.y
-        if ((enemy_x - player_x) in range(-1,1)) and ((enemy_y - player_y) in range(-1,1)):
-            pass
+    
 
     def update(self):
         self.hit_reaction()
@@ -151,7 +153,6 @@ class Enemy(Entity):
         self.cooldowns()
         
     def enemy_update(self,player):
-        self.connected_to_player(player)
         self.get_status(player)
         self.actions(player)
         self.check_death()
