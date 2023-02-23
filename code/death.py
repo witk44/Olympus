@@ -35,9 +35,11 @@ class DeathScreen():
         name = "You Died, LMAO"
         self.rect = pygame.rect.Rect(l,t,self.width,self.height)
         pygame.draw.rect(self.display_surface,UI_BG_COLOR,self.rect)
-        self.display_names(self.display_surface,name,20)
+        self.display_names(self.display_surface,name,5)
+        name = "Trashbag, Dogwater Player"
+        self.display_names(self.display_surface,name,25)
         name = "Press Spacebar to restart"
-        self.display_names(self.display_surface,name,50)
+        self.display_names(self.display_surface,name,45)
     
     def display_names(self,surface,name,height):
         color =  TEXT_COLOR

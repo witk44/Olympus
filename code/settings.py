@@ -48,7 +48,7 @@ magic_data = {
     'heal' : {'strength': 10,'cost': 20,'graphic':'../graphics/particles/heal/tile000.png'}}
 
 monster_data = {
-    'squid': {'health': 100,'exp':100,'damage':20,'attack_type': 'slash', 'attack_sound':'../audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 129, 'notice_radius': 360, "update_radius":500},
-    'cyclops': {'health': 75,'exp':250,'damage':30,'attack_type': 'claw',  'attack_sound':'../audio/attack/claw.wav','speed': 2.5, 'resistance': 3, 'attack_radius': 129, 'notice_radius': 400, "update_radius":500},
-    'spirit': {'health': 75,'exp':110,'damage':8,'attack_type': 'thunder', 'attack_sound':'../audio/attack/fireball.wav', 'speed': 3.5, 'resistance': 3, 'attack_radius': 129, 'notice_radius': 350, "update_radius":500},
-    'bamboo': {'health': 100,'exp':120,'damage':6,'attack_type': 'leaf_attack', 'attack_sound':'../audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 129, 'notice_radius': 300, "update_radius":500}}
+    'squid': {'health': 100,'exp':100,'damage':20,'attack_type': 'slash', 'attack_sound':'../audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 127, 'notice_radius': 360, "update_radius":500},
+    'cyclops': {'health': 75,'exp':250,'damage':30,'attack_type': 'claw',  'attack_sound':'../audio/attack/claw.wav','speed': 2.5, 'resistance': 3, 'attack_radius': 127, 'notice_radius': 400, "update_radius":500},
+    'spirit': {'health': 75,'exp':110,'damage':8,'attack_type': 'thunder', 'attack_sound':'../audio/attack/fireball.wav', 'speed': 3.5, 'resistance': 3, 'attack_radius': 127, 'notice_radius': 350, "update_radius":500},
+    'bamboo': {'health': 100,'exp':120,'damage':6,'attack_type': 'leaf_attack', 'attack_sound':'../audio/attack/slash.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 127, 'notice_radius': 300, "update_radius":500}}
