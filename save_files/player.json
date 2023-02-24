@@ -1,0 +1,28 @@
+{
+      "sprite_type": "player",
+      "image": "player.png",
+      "status": "down_idle",
+      "x": 1210,
+      "y": 6075,
+      "weapon_index": 0,
+      "magic_index": 1,
+      "stats": {
+            "health": 100,
+            "energy": 60,
+            "attack": 10,
+            "magic": 6.0,
+            "speed": 4
+      },
+      "upgrade_cost": {
+            "health": 100,
+            "energy": 100,
+            "attack": 100,
+            "magic": 180.0,
+            "speed": 100
+      },
+      "health": 100,
+      "energy": 60,
+      "magic": "heal",
+      "exp": 150,
+      "speed": 4
+}
