@@ -20,6 +20,9 @@ ENERGY_BAR_WIDTH = 140
 ITEM_BOX_SIZE = 100
 UI_FONT = '../graphics/font/neon.ttf'
 UI_FONT_SIZE = 16
+BLOODY_FONT = '../graphics/font/BloodytypepersonaluseBold-OVe6e.otf'
+FLYING_BIRD_FONT = '../graphics/font/FlyingBird-Yz9Ga.otf'
+RICH_THE_BARBER_FONT = '../graphics/font/RichTheBarberPersonalUse-gx824.ttf'
 
 # general colors
 WATER_COLOR = '#71ddee'

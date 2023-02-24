@@ -1,4 +1,6 @@
 import pygame,sys
+import json
+import pickle
 from settings import *
 from pygame.locals import *
 from support import *
@@ -8,59 +10,114 @@ class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,attackable_sprites,create_attack,destroy_attack,create_magic):
         super().__init__(groups)
         pygame.init()
-        self.sprite_type = 'player'
-        self.image = pygame.image.load('../graphics/player/player.png').convert_alpha()
-        self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect.inflate(0,HITBOX_OFFSET['player'])
-        self.import_player_assets()
-        self.status = 'down'
-        self.alive = True
-        self.escape_key = False
-        self.last_key_pressed = None
-        #movement
-        self.attacking = False
-        self.attack_cooldown = 300
-        self.attack_time = None
-        self.obstacle_sprites = obstacle_sprites
-        self.attackable_sprites = attackable_sprites
-        
+        saved_player_file = open("../save_files/player.json")
+        saved_player = json.load(saved_player_file)
+        if saved_player:
+            self.sprite_type = saved_player["sprite_type"]
+            self.image = pygame.image.load('../graphics/player/' + self.sprite_type + '.png').convert_alpha()
+            self.rect = self.image.get_rect(topleft = (saved_player["x"],saved_player["y"]))
+            
+            self.hitbox = self.rect.inflate(0,HITBOX_OFFSET['player'])
+            self.import_player_assets()
+            self.status = saved_player["status"]
+            self.alive = True
+            self.escape_key = False
+            self.last_key_pressed = None
+            self.attacking = False
+            self.attack_cooldown = 300
+            self.attack_time = None
+            self.obstacle_sprites = obstacle_sprites
+            self.attackable_sprites = attackable_sprites
+            
 
-        #weapon
-        self.create_attack = create_attack
-        self.can_switch_weapon = True
-        self.weapon_switch_time = None
-        self.switch_duration_cooldown = 200
-        self.create_attack = create_attack
-        self.destroy_attack = destroy_attack
-        self.weapon_index = 0
-        self.weapon = list(weapon_data.keys())[self.weapon_index]
+            #weapon
+            self.create_attack = create_attack
+            self.can_switch_weapon = True
+            self.weapon_switch_time = None
+            self.switch_duration_cooldown = 200
+            self.destroy_attack = destroy_attack
+            self.weapon_index = 0
+            self.weapon = list(weapon_data.keys())[self.weapon_index]
 
-        #magic
-        self.create_magic = create_magic
-        self.magic_index = 0
-        self.magic = list(magic_data.keys())[self.magic_index]
+            #magic
+            self.create_magic = create_magic
+            self.magic_index = 0
+            self.magic = list(magic_data.keys())[self.magic_index]
 
-        self.can_switch_magic = True
-        self.magic_switch_time = None
+            self.can_switch_magic = True
+            self.magic_switch_time = None
 
 
-        #stats
-        self.stats = {"health": 100, "energy": 60, "attack": 10, "magic":4, "speed": 4}
-        self.max_stats = {"health": 400, "energy": 200, "attack": 100, "magic":100, "speed": 9}
-        self.upgrade_cost = {"health": 100, "energy": 100, "attack": 100, "magic":100, "speed": 100}
-        self.health = self.stats['health']
-        self.energy = self.stats['energy']
-        self.spell_dmg  = self.stats['magic']
-        self.exp = 0
-        self.speed = self.stats['speed']
-                
-        #damge timer
-        self.hittable = True
-        self.hurt_time = None
-        self.invulnerability_duration = 600
+            #stats
+            self.stats = {"health": 100, "energy": 60, "attack": 10, "magic":4, "speed": 4}
+            self.max_stats = {"health": 400, "energy": 200, "attack": 100, "magic":100, "speed": 9}
+            self.upgrade_cost = {"health": 100, "energy": 100, "attack": 100, "magic":100, "speed": 100}
+            self.health = self.stats['health']
+            self.energy = self.stats['energy']
+            self.spell_dmg  = self.stats['magic']
+            self.exp = 0
+            self.speed = self.stats['speed']
+                    
+            #damge timer
+            self.hittable = True
+            self.hurt_time = None
+            self.invulnerability_duration = 600
 
-        self.weapon_attack_sound = pygame.mixer.Sound('../audio/sword.wav')
-        self.weapon_attack_sound.set_volume(0.3)
+            self.weapon_attack_sound = pygame.mixer.Sound('../audio/sword.wav')
+            self.weapon_attack_sound.set_volume(0.3)
+        else:
+            self.sprite_type = 'player'
+            self.image = pygame.image.load('../graphics/player/player.png').convert_alpha()
+            self.rect = self.image.get_rect(topleft = pos)
+            
+            self.hitbox = self.rect.inflate(0,HITBOX_OFFSET['player'])
+            self.import_player_assets()
+            self.status = 'down'
+            self.alive = True
+            self.escape_key = False
+            self.last_key_pressed = None
+            self.attacking = False
+            self.attack_cooldown = 300
+            self.attack_time = None
+            self.obstacle_sprites = obstacle_sprites
+            self.attackable_sprites = attackable_sprites
+            
+
+            #weapon
+            self.create_attack = create_attack
+            self.can_switch_weapon = True
+            self.weapon_switch_time = None
+            self.switch_duration_cooldown = 200
+            self.destroy_attack = destroy_attack
+            self.weapon_index = 0
+            self.weapon = list(weapon_data.keys())[self.weapon_index]
+
+            #magic
+            self.create_magic = create_magic
+            self.magic_index = 0
+            self.magic = list(magic_data.keys())[self.magic_index]
+
+            self.can_switch_magic = True
+            self.magic_switch_time = None
+
+
+            #stats
+            self.stats = {"health": 100, "energy": 60, "attack": 10, "magic":4, "speed": 4}
+            self.max_stats = {"health": 400, "energy": 200, "attack": 100, "magic":100, "speed": 9}
+            self.upgrade_cost = {"health": 100, "energy": 100, "attack": 100, "magic":100, "speed": 100}
+            self.health = self.stats['health']
+            self.energy = self.stats['energy']
+            self.spell_dmg  = self.stats['magic']
+            self.exp = 0
+            self.speed = self.stats['speed']
+                    
+            #damge timer
+            self.hittable = True
+            self.hurt_time = None
+            self.invulnerability_duration = 600
+
+            self.weapon_attack_sound = pygame.mixer.Sound('../audio/sword.wav')
+            self.weapon_attack_sound.set_volume(0.3)
         
 
        
@@ -77,6 +134,10 @@ class Player(Entity):
         if not self.attacking:
             keys = pygame.key.get_pressed()  
             if keys[pygame.K_ESCAPE] :
+                s = self.serialize()
+                out_file = open("../save_files/player.json", "w")
+                json.dump(s,out_file,indent=6)
+                out_file.close()
                 self.kill()
                 self.escape_key = True
             if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -225,3 +286,22 @@ class Player(Entity):
         self.move(self.speed)
         self.energy_recovery()
     
+    def serialize(self):
+        self.x = int(self.rect.x)
+        self.y= int(self.rect.y)
+       
+        return {"sprite_type": self.sprite_type,
+                    'image': self.sprite_type + '.png',
+                    'status': self.status,
+                    'x':    self.x,
+                    'y': self.y,
+                    'weapon_index': self.weapon_index,
+                    'magic_index': self.magic_index,
+                    'stats': self.stats,
+                    'upgrade_cost': self.upgrade_cost,
+                    'health': self.health,
+                    'energy': self.energy,
+                    'magic': self.magic,
+                    'exp':self.exp,
+                    'speed':self.speed
+                    }
