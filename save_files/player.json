@@ -1,9 +1,9 @@
 {
       "sprite_type": "player",
       "image": "player.png",
-      "status": "up_idle",
-      "x": 996,
-      "y": 6118,
+      "status": "down_idle",
+      "x": 1218,
+      "y": 6065,
       "weapon_index": 0,
       "magic_index": 1,
       "stats": {
@@ -21,7 +21,7 @@
             "speed": 100
       },
       "health": 100,
-      "energy": 54.54000000000058,
+      "energy": 60,
       "magic": "heal",
       "exp": 150,
       "speed": 4
