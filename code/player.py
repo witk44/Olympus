@@ -36,12 +36,12 @@ class Player(Entity):
             self.weapon_switch_time = None
             self.switch_duration_cooldown = 200
             self.destroy_attack = destroy_attack
-            self.weapon_index = 0
+            self.weapon_index = saved_player['weapon_index']
             self.weapon = list(weapon_data.keys())[self.weapon_index]
 
             #magic
             self.create_magic = create_magic
-            self.magic_index = 0
+            self.magic_index = saved_player['magic_index']
             self.magic = list(magic_data.keys())[self.magic_index]
 
             self.can_switch_magic = True
@@ -49,14 +49,15 @@ class Player(Entity):
 
 
             #stats
-            self.stats = {"health": 100, "energy": 60, "attack": 10, "magic":4, "speed": 4}
+            self.stats = saved_player['stats']
             self.max_stats = {"health": 400, "energy": 200, "attack": 100, "magic":100, "speed": 9}
-            self.upgrade_cost = {"health": 100, "energy": 100, "attack": 100, "magic":100, "speed": 100}
-            self.health = self.stats['health']
-            self.energy = self.stats['energy']
+            self.upgrade_cost = saved_player['upgrade_cost']
+            self.health = saved_player['health']
+            self.energy = saved_player['energy']
             self.spell_dmg  = self.stats['magic']
-            self.exp = 0
-            self.speed = self.stats['speed']
+            self.exp = saved_player['exp']
+            self.speed = saved_player['speed']
+            self.magic = saved_player['magic']
                     
             #damge timer
             self.hittable = True
