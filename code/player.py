@@ -1,6 +1,6 @@
 import pygame,sys
 import json
-import pickle
+import os
 from settings import *
 from pygame.locals import *
 from support import *
@@ -10,9 +10,10 @@ class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,attackable_sprites,create_attack,destroy_attack,create_magic):
         super().__init__(groups)
         pygame.init()
-        saved_player_file = open("../save_files/player.json")
-        saved_player = json.load(saved_player_file)
-        if saved_player:
+        
+        if os.path.exists("../save_files/player.json"):
+            saved_player_file = open("../save_files/player.json")
+            saved_player = json.load(saved_player_file)
             self.sprite_type = saved_player["sprite_type"]
             self.image = pygame.image.load('../graphics/player/' + self.sprite_type + '.png').convert_alpha()
             self.rect = self.image.get_rect(topleft = (saved_player["x"],saved_player["y"]))

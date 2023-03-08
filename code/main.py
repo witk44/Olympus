@@ -8,7 +8,7 @@ code = b"""
 import pygame,sys
 from settings import *
 from level import Level
-
+from main_menu import MainMenu
 class Game:
     def __init__(self) -> None:
         pygame.init()
@@ -16,6 +16,7 @@ class Game:
         self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
         pygame.display.set_caption("Olympus")
         self.clock = pygame.time.Clock()
+        MainMenu().display()
         self.level = Level()
         main_sound = pygame.mixer.Sound('../audio/main.ogg')
         main_sound.set_volume(.5)
