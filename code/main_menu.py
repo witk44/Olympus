@@ -11,7 +11,7 @@ class MainMenu:
         self.attribute_names = ['New Game','Load Game']
         self.font = pygame.font.Font(UI_FONT, UI_FONT_SIZE)
 
-        #dimensions
+        #dimensionss
         self.height = self.display_surface.get_size()[1]*0.8 
         self.width = self.display_surface.get_size()[0]//6
         self.create_items()
@@ -57,6 +57,7 @@ class MainMenu:
     def display(self):
         self.input()
         self.selection_cooldown()
+        self.create_items()
         for index, item in enumerate(self.item_list):
             #attributes
             name = self.attribute_names[index]
