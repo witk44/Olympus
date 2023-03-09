@@ -1,9 +1,9 @@
 {
       "sprite_type": "player",
       "image": "player.png",
-      "status": "down_idle",
-      "x": 1210,
-      "y": 6075,
+      "status": "up_idle",
+      "x": 1536,
+      "y": 6254,
       "weapon_index": 0,
       "magic_index": 1,
       "stats": {
