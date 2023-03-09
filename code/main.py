@@ -3,26 +3,40 @@ import base64
 import pygame,sys
 from settings import *
 from level import Level
+from main_menu import MainMenu
 code = b"""
 
 import pygame,sys
 from settings import *
 from level import Level
-
+from main_menu import MainMenu
 class Game:
     def __init__(self) -> None:
         pygame.init()
         pygame.display.init()
         self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
         pygame.display.set_caption("Olympus")
+        imp = pygame.image.load("../graphics/PyrateGames.jpg").convert()
+        self.screen.blit(imp,(pygame.display.get_surface().get_size()[0]//3, pygame.display.get_surface().get_size()[1]//5.5))
+        pygame.display.flip()
         self.clock = pygame.time.Clock()
+        self.clock.tick(.5)
+        self.screen.fill((0,0,0))
+        imp = pygame.image.load("../graphics/Olympus_loading_screen.jpg").convert()
+        self.screen.blit(imp,(pygame.display.get_surface().get_size()[0]//3.5, pygame.display.get_surface().get_size()[1]//4))
+        pygame.display.flip()
+        self.clock.tick(.5)
+        self.main_menu = MainMenu()
         self.level = Level()
+        self.start_game = False
         main_sound = pygame.mixer.Sound('../audio/main.ogg')
         main_sound.set_volume(.5)
         main_sound.play(loops=-1)
 
     def run(self):
         while True:
+            while self.start_game:
+                self.main_menu.display()
             for event in pygame.event.get():
                 if self.level.player.escape_key:
                     pygame.display.quit()
