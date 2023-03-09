@@ -47,7 +47,7 @@ class MainMenu:
         self.item_list = []
         for item,index in enumerate(range(self.attribute_nr)):
             full_width = self.display_surface.get_size()[0]
-            increment = full_width // self.attribute_nr
+            increment = full_width // (self.attribute_nr + 2)
             left = (item*increment)+(increment-self.width) // 2
 
             top = self.display_surface.get_size()[1]*.1
@@ -57,7 +57,6 @@ class MainMenu:
     def display(self):
         self.input()
         self.selection_cooldown()
-        self.create_items()
         for index, item in enumerate(self.item_list):
             #attributes
             name = self.attribute_names[index]

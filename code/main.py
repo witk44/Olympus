@@ -16,16 +16,7 @@ class Game:
         pygame.display.init()
         self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
         pygame.display.set_caption("Olympus")
-        imp = pygame.image.load("../graphics/PyrateGames.jpg").convert()
-        self.screen.blit(imp,(pygame.display.get_surface().get_size()[0]//3, pygame.display.get_surface().get_size()[1]//5.5))
-        pygame.display.flip()
-        self.clock = pygame.time.Clock()
-        self.clock.tick(.5)
-        self.screen.fill((0,0,0))
-        imp = pygame.image.load("../graphics/Olympus_loading_screen.jpg").convert()
-        self.screen.blit(imp,(pygame.display.get_surface().get_size()[0]//3.5, pygame.display.get_surface().get_size()[1]//4))
-        pygame.display.flip()
-        self.clock.tick(.5)
+        self.display_loading_screens()
         self.main_menu = MainMenu()
         self.level = Level()
         self.start_game = False
@@ -35,25 +26,44 @@ class Game:
 
     def run(self):
         while True:
-            while self.start_game:
+            if self.start_game:
                 self.main_menu.display()
-            for event in pygame.event.get():
-                if self.level.player.escape_key:
-                    pygame.display.quit()
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.QUIT:
-                    pygame.display.quit()
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_m:
-                        self.level.toggle_menu()
-            self.screen.fill(WATER_COLOR)
-            self.level.run()
-            pygame.display.update()
-            self.clock.tick(FPS)
+                self.start_game != self.start_game
+            else:
+                for event in pygame.event.get():
+                    if self.level.player.escape_key:
+                        pygame.display.quit()
+                        pygame.quit()
+                        sys.exit()
+                    if event.type == pygame.QUIT:
+                        pygame.display.quit()
+                        pygame.quit()
+                        sys.exit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_m:
+                            self.level.toggle_menu()
+                self.screen.fill(WATER_COLOR)
+                self.level.run()
+                pygame.display.update()
+                self.clock.tick(FPS)
 
+    def display_loading_screens(self):
+        imp = pygame.image.load("../graphics/PyrateGames.jpg").convert_alpha()
+        imp = pygame.transform.scale(imp, (pygame.display.get_surface().get_size()[0], pygame.display.get_surface().get_size()[1]))
+        rect = imp.get_rect()
+        rect.center = (pygame.display.get_surface().get_size()[0]//2, pygame.display.get_surface().get_size()[1]//2)
+        self.screen.blit(imp,rect)
+        pygame.display.flip()
+        self.clock = pygame.time.Clock()
+        self.clock.tick(.5)
+        self.screen.fill((0,0,0))
+        imp = pygame.image.load("../graphics/Olympus_loading_screen.jpg").convert_alpha()
+        imp = pygame.transform.scale(imp, (pygame.display.get_surface().get_size()[0], pygame.display.get_surface().get_size()[1]))
+        rect = imp.get_rect()
+        rect.center = (pygame.display.get_surface().get_size()[0]//2, pygame.display.get_surface().get_size()[1]//2)
+        self.screen.blit(imp,rect)
+        pygame.display.flip()
+        self.clock.tick(.5)
 if __name__ == "__main__":
     game = Game()
     game.run()
