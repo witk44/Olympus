@@ -1,28 +1,28 @@
 {
       "sprite_type": "player",
       "image": "player.png",
-      "status": "right_idle",
-      "x": 2389,
-      "y": 3443,
-      "weapon_index": 1,
+      "status": "down_idle",
+      "x": 1210,
+      "y": 6075,
+      "weapon_index": 0,
       "magic_index": 1,
       "stats": {
-            "health": 400,
-            "energy": 200,
-            "attack": 100,
-            "magic": 68.34375,
-            "speed": 9.0
+            "health": 100,
+            "energy": 60,
+            "attack": 10,
+            "magic": 6.0,
+            "speed": 4
       },
       "upgrade_cost": {
-            "health": 1049.7600000000002,
-            "energy": 583.2,
-            "attack": 3401.222400000001,
-            "magic": 6122.200320000002,
-            "speed": 324.0
+            "health": 100,
+            "energy": 100,
+            "attack": 100,
+            "magic": 180.0,
+            "speed": 100
       },
-      "health": 400,
-      "energy": 200,
+      "health": 100,
+      "energy": 60,
       "magic": "heal",
-      "exp": 8384.521599999996,
-      "speed": 9.0
+      "exp": 150,
+      "speed": 4
 }
