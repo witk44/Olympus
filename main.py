@@ -19,29 +19,27 @@ class Game:
         self.display_loading_screens()
         self.main_menu = MainMenu()
         self.level = Level()
-        self.start_game = False
+        self.start_game = True
         main_sound = pygame.mixer.Sound(app_path('resources/audio/main.ogg'))
         main_sound.set_volume(.5)
         main_sound.play(loops=-1)
 
     def run(self):
         while True:
-            if self.start_game:
-                self.main_menu.display()
-                self.start_game != self.start_game
-            else:
-                for event in pygame.event.get():
-                    if self.level.player.escape_key:
-                        pygame.display.quit()
-                        pygame.quit()
-                        sys.exit()
-                    if event.type == pygame.QUIT:
-                        pygame.display.quit()
-                        pygame.quit()
-                        sys.exit()
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_m:
-                            self.level.toggle_menu()
+            self.main_menu.display()
+            self.start_game != self.start_game
+            for event in pygame.event.get():
+                if self.level.player.escape_key:
+                    pygame.display.quit()
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_m:
+                        self.level.toggle_menu()
                 self.screen.fill(WATER_COLOR)
                 self.level.run()
                 pygame.display.update()
