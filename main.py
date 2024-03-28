@@ -4,7 +4,7 @@ import pygame,sys
 from resources.code.settings import *
 from resources.code.level import Level
 from resources.code.main_menu import MainMenu
-code = b"""
+# code = b"""
 
 import pygame,sys
 from resources.code.settings import *
@@ -68,12 +68,12 @@ if __name__ == "__main__":
     game = Game()
     game.run()
 
-"""
+# """
 
-key = Fernet.generate_key()
-encryption_type = Fernet(key)
-encrypted_message = encryption_type.encrypt(code)
+# key = Fernet.generate_key()
+# encryption_type = Fernet(key)
+# encrypted_message = encryption_type.encrypt(code)
 
-decrypted_message = encryption_type.decrypt(encrypted_message)
+# decrypted_message = encryption_type.decrypt(encrypted_message)
 
-exec(decrypted_message)
+# exec(decrypted_message)
